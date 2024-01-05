@@ -1,0 +1,33 @@
+body {
+    background-color: rgba(13, 9, 71, 0.445);
+}
+
+button {
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: midnightblue;
+}
+
+
+
+ h1 {
+    font-weight:  bolder;
+    text-align: center;
+  }  
+
+.loader {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70vh;
+    margin: 0 0 0 30%;
+}
+
