@@ -8,7 +8,7 @@ const port = 3001;
 app.use(bodyParser.json());
 app.use(cors());
 
-let comments = [
+const comments = [
     { id: Date.now(), text: 'Comment 1'},
     { id: Date.now(), text: 'comment 2'},
     { id: Date.now(), text: 'comment 3'}
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.get('/comments', (req, res) => {
-    res.json(comments)
+    res.send('comments')
    });
 
 app.post('/comments', (req, res) => {

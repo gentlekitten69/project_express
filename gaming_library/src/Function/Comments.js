@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
+
 const Commentssection = ()=> {
-    const [commentText, setCommentText] = useState();
-
+    const [commentText, setCommentText] = useState('');
+   
     useEffect(() => {
-        const fetchComments = async () => {
+        const fetchComments = async (comments) => {
              try {
-             const response = await fetch('http://localhost:3001/comments')
-
-             if (!response.ok){
-                alert('Error');
-             }
+             const response = await fetch(`http://localhost:3001/comments`)
+             
              const data = await response.json();
+             
              setCommentText(data);
             } catch (error) {
                 console.error('Error')
@@ -20,7 +19,7 @@ const Commentssection = ()=> {
     fetchComments();
   }, [])
 
-      
+                    
         
 //     const handleComment = async () => {
 //         try {
@@ -42,7 +41,7 @@ const Commentssection = ()=> {
     return (
         <div>
             <h2>Comments</h2>
-            <ul>{Comment[commentText]}</ul>
+            <ul></ul>
             <input type='text'
              placeholder='Comments'
             />
