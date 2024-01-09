@@ -22,7 +22,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.get('/comments', (req, res) => {
-    res.send('comments')
+    res.send({"Comments": comments})
+ 
    });
 
 app.post('/comments', (req, res) => {
