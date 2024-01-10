@@ -8,10 +8,12 @@ const port = 3001;
 app.use(bodyParser.json());
 app.use(cors());
 
-const comments = [
-    { id: Date.now(), text: 'Comment 1'},
-    { id: Date.now(), text: 'comment 2'},
-    { id: Date.now(), text: 'comment 3'}
+let commentIdCounter = 1;
+
+let comments = [
+    { id: commentIdCounter++, content: 'Comment 1', comments:[]},
+    { id: commentIdCounter++, content: 'comment 2', comments:[]},
+    { id: commentIdCounter++, content: 'comment 3', comments:[]}
 ];
 
 app.use((req, res, next) => {
@@ -22,7 +24,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.get('/comments', (req, res) => {
-    res.send({"Comments": comments})
+    res.json(comments)
  
    });
 
@@ -31,18 +33,14 @@ app.post('/comments', (req, res) => {
      {id: Date.now(), ...req.body};
      comments.push(newComment);
   
-   res.json(201).json(newComment)
+   res.status(201).json(newComment)
 });
 
-app.put('/comments/:id', (req, res) => {
+app.delete('/comments/:id', (req, res) => {
     const { id } = req.params;
-    let comment = comments.find(comment => comment.id === Number(id));
-    if (index !== -1) {
-        comments[index] = {...comments[index], ...req.body, comments: []};
-        res.json(comments[index]);
-    } else {
-        res.sendStatus(404); 
-    }
+
+    commenst = comments.filter(comment => comment.id !== Number(id));
+    res.status(204).send();
 })
 
 

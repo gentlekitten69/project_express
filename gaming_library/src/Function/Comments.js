@@ -1,53 +1,80 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 const Commentssection= () => {
-    const [results, setResults] = useState([]);
-    const [comment, setComment] = useState('');
-    const [prevComment, setPrevComment] = useState('');
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState({
+    id: Date.now(),
+    title:'',
+    content:''
+  });
+ 
    
-  
-    const fetchComments = async () => {
-             try {
-                const response = await fetch(`http://localhost:3001/comments`)
-                const data = await response.json();
-                
-                setResults(data);
-                
-            } catch (error) {
-                console.error('Error')
-        }
-        setResults();
-    }
-   
-
-  
-
-                    
-        
-    // const handleComment = async () => {
-   
-    //         const response = await fetch('http://localhost:3001/comments', {
-    //             method: 'POST',
-    //             headers: {'Content-Type': 'application/json'},
-    //             body: JSON.stringify({ text: setPrevComment }),
-    //         }); 
-    //     }
     
-        
+  useEffect(() => {
+    const fetchComments = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/comments')
+            setComments(response.data)
+        } catch (error) {
+            console.error('Error')
+        }
+    };
+    fetchComments();
+  }, []);
+
+  const handleCommentChange = (e) => {
+    setNewComment({...newComment, [e.target.name]: e.target.value })
+  }
+
+  const handleAddComment = async () => {
+    try {
+        const response = await axios.post('http://localhost:3001/comments', newComment);
+
+        setComments([...comments, response.data]);
+
+        setNewComment({ id: DataTransfer.now(), title: '', content:''});
+    } catch (error) {
+        console.error('Error')
+    }
+  }
+    
+    const handleDelete = async (commentId) => {
+        try {
+            await axios.delete(`http://localhost:3001/comments/${commentId}`);
+
+            setComments(comments.filter((comment) => comment.id !== commentId));
+        } catch (error) {
+            console.error('Error Deleting Comment', error)
+        }
+    };
+    
      
     return (
         <div>
             <h2>Comments</h2>
-            <ul></ul>
-            <>{fetchComments}</>
-            <input type='text'
-             placeholder='Comments'
-             value={comment}
-             onChange={(e) => setComment(e.target.value)}
-            />
-            
-            <button>Add Comment</button>
+            <ul>
+               {comments.map((comment) => (
+                <li key={comment.id}>{comment.title}: {comment.content} <button onClick={() => handleDelete(comment.id)}>Delete</button></li>
+               ))}
+            </ul>
+            <input 
+                type='text'
+                placeholder='Title'
+                name= 'title'
+                value={newComment.title}
+                onChange={handleCommentChange}
+             />
+             <input 
+                type='text'
+                placeholder='content'
+                name='content'
+                value={newComment.content}
+                onChange={handleCommentChange}
+             />
+          
+            <button onClick={handleAddComment}>Add Comment</button>
         </div>
     )
 }
