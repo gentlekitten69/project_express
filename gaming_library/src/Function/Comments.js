@@ -68,8 +68,8 @@ const Commentssection= () => {
              />
              <input 
                 type='text'
-                placeholder='content'
-                name='content'
+                placeholder='comment'
+                name='comment'
                 value={newComment.content}
                 onChange={handleCommentChange}
              />
