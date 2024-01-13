@@ -1,19 +1,26 @@
 const express = require ('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const { v4: uuidv4 } = require('uuid');
+
 
 const app = express();
 const port = 3001;
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
 
-let commentIdCounter = 1;
+
+let games = [
+    {id: 1, name: 'Game 1', genre: 'Action'}
+]
+
 
 let comments = [
-    { id: commentIdCounter++, content: 'Comment 1', comments:[]},
-    { id: commentIdCounter++, content: 'comment 2', comments:[]},
-    { id: commentIdCounter++, content: 'comment 3', comments:[]}
+    { id: 1, content: 'Comment 1', comments:[]},
+    { id: 2, content: 'comment 2', comments:[]},
+    { id: 3, content: 'comment 3', comments:[]}
 ];
 
 app.use((req, res, next) => {
@@ -21,16 +28,16 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.json());
-
-app.get('/comments', (req, res) => {
+app.get('/comments', ( req, res) => {
     res.json(comments)
- 
-   });
+});
+
+
+
 
 app.post('/comments', (req, res) => {
-    const newComment = 
-     {id: Date.now(), ...req.body};
+   const newComment = 
+     {id: uuidv4(), ...req.body};
      comments.push(newComment);
   
    res.status(201).json(newComment)
@@ -39,19 +46,17 @@ app.post('/comments', (req, res) => {
 app.delete('/comments/:id', (req, res) => {
     const { id } = req.params;
 
-    commenst = comments.filter(comment => comment.id !== Number(id));
+    comments = comments.filter(comment => comment.id !== id);
+    
+    TODO:
     res.status(204).send();
+
 })
 
 
 
-app.delete('/comments/:id', (req, res) => {
-    const { id } = req.params;
-
-    comments = comments.filter(comment => comment.id !== Number(id));
-    res.status(204).send();
-    })
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
+

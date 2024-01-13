@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import shortid from 'shortid'
 
 
 const Commentssection= () => {
+   
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({
-    id: Date.now(),
+    id: shortid.generate(),
     title:'',
     content:''
   });
@@ -22,19 +24,22 @@ const Commentssection= () => {
         }
     };
     fetchComments();
-  }, []);
+  },[])
+
+ 
 
   const handleCommentChange = (e) => {
     setNewComment({...newComment, [e.target.name]: e.target.value })
   }
 
   const handleAddComment = async () => {
-    try {
-        const response = await axios.post('http://localhost:3001/comments', newComment);
-
+   try {
+        const response = await axios.post('http://localhost:3001/comments', newComment)
+   
+   
         setComments([...comments, response.data]);
 
-        setNewComment({ id: DataTransfer.now(), title: '', content:''});
+        setNewComment({ id: shortid.generate(), title: '', content:''});
     } catch (error) {
         console.error('Error')
     }
@@ -56,7 +61,7 @@ const Commentssection= () => {
             <h2>Comments</h2>
             <ul>
                {comments.map((comment) => (
-                <li key={comment.id}>{comment.title}: {comment.content} <button onClick={() => handleDelete(comment.id)}>Delete</button></li>
+                <li > <strong>{comment.id}:</strong>   {comment.title}: {comment.content} <button onClick={() => handleDelete(comment.id)}>Delete</button></li>
                ))}
             </ul>
             <input 
@@ -68,8 +73,8 @@ const Commentssection= () => {
              />
              <input 
                 type='text'
-                placeholder='comment'
-                name='comment'
+                placeholder='content'
+                name='content'
                 value={newComment.content}
                 onChange={handleCommentChange}
              />
