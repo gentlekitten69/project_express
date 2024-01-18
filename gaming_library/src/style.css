@@ -27,7 +27,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 70vh;
+    width: 50vh;
     margin: 0 0 0 30%;
 }
 
@@ -40,14 +40,14 @@ button:hover {
 
 body {
     background: #1e06a583;
-    min-height: 200vh;
+    min-height: 100vh;
 }
 
 header {
     position: fixed;
     top: 0;
     Left: 0;
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
