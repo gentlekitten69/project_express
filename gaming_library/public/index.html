@@ -8,13 +8,30 @@
       name="description"
       content="Web site created using create-react-app"
     />
-
-    
-    <title>Gameing App</title>
+      <title>Gameing App</title>
+      
   </head>
+  </style> 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+      <header>
+        <a  class="'logo">Guide</a>
+          <ul>
+            <li><a href='#'>Popular Games</a></li>
+            <li><a href='#'>Genre</a></li>
+          </ul>
+      </header>
+      <section class="banner"></section>
+      <script type="text/JavaScript">
+          window.addEventListener("scroll", function(){
+            let header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+          })
+      </script>
+
+ 
  
   </body>
+ 
 </html>

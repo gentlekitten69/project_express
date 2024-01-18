@@ -12,9 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 
-let games = [
-    {id: 1, name: 'Game 1', genre: 'Action'}
-]
+let games = []
 
 
 let comments = [
@@ -32,7 +30,20 @@ app.get('/comments', ( req, res) => {
     res.json(comments)
 });
 
+app.get('/games/:name/:genre', (req, res ) => {
+    let results = []
+    
+    let name = req.params.name;
+    let genre = req.params.genre;
 
+    for (let game of data) { 
+        if ((game.name === name || name ==='any') && (game.genre === genre)) {
+            results.push(game);
+        }
+    }
+
+    res.json(results);
+})
 
 
 app.post('/comments', (req, res) => {
@@ -52,9 +63,6 @@ app.delete('/comments/:id', (req, res) => {
     res.status(204).send();
 
 })
-
-
-
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
