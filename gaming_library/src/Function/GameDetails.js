@@ -27,7 +27,7 @@ const GameDetails = () => {
     }, [id]);
 
     return (
-        <div>
+        <div className="details">
             {games ? (
                <div>
                <h1>{games.name}</h1>
@@ -38,7 +38,6 @@ const GameDetails = () => {
                <ul>
                  {games.ratings.map((result) => (
                    <li>
-                     {result.parent_platforms}
                      {result.title} <br />
                      {result.percent}%
                    </li>
