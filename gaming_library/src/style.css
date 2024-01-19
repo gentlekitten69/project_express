@@ -71,7 +71,7 @@ header .logo {
     transition: 0.6s;
 }
 
-header ul {
+header ul , navbar-nav {
     position: relative;
     display: flex;
     justify-content: center;
