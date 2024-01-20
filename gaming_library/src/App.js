@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadGames from './Function/LoadGames';
 import GameDetails from "./Function/GameDetails";
 import './style.css';
-
+import NavBar from "./Display/NavBar";
 
 
 
@@ -11,13 +11,15 @@ function App() {
  
   return (
     <div className="App">
-    
-    <Router>
+    <header> 
+      <NavBar />
+    </header>
+   
       <Routes>
        <Route path='/' Component={LoadGames} />
         <Route path= "/GameDetails/:id" element={<GameDetails />} />
       </Routes>
-     </Router> 
+    
     </div>
   );
 }

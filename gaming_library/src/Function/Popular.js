@@ -4,13 +4,15 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import '../style.css';
+import { Link } from 'react-router-dom';
 
 
-const PopularGames = () => {
-
-    const [games, setGames] = useState([]);
-    const URL = `http://api.rawg.io/api/games?dates=2023-01-01,2023-12-31&ordering=-added&key=ef855fc72b30488f8dc0e80014dbfc6a`
-
+const PopularGames = (props) => {
+    const [games, setGames] = useState([{}]);
+    const [page, setPage] = useState(1)
+    const URL = `https://api.rawg.io/api/games?dates=2023-01-01,2023-12-31&ordering=-added&page=${page}&key=ef855fc72b30488f8dc0e80014dbfc6a`
+    
     useEffect(() => {
         const fetchGames = async () => {
             try {
@@ -18,7 +20,7 @@ const PopularGames = () => {
                 const data = await response.json();
 
                 if (data.results) {
-                   setGames();
+                    setGames((prevGames) => (page === 0 ? games : [...prevGames, ...data.results])) 
                    
                 }
             } catch (error) {
@@ -27,35 +29,42 @@ const PopularGames = () => {
         };
 
         fetchGames();
-    }, [URL]);
+    }, [URL, page]);
+
+
+    const handLoad = () => {
+        setPage(prevPage => prevPage + 1)
+    };
 
     return (
         <div>
-            
+          <h1>New Games!</h1>
             <div className='card'style={{ display: 'flex', flexWrap:'wrap', justifyContent: 'space-evenly'}}>
-                        {games.map((game) => (
-                        <Card  key={game.id} sx={{maxwidth:300, 
+                        {games.map((results) => (
+                        <Card  key={results.id} sx={{maxwidth:300, 
                             margin: '16px', backgroundColor:'blueviolet'}}>
                         <CardMedia
                             component='img'
-                            alt= {game.name}
+                            alt= {results.name}
                             sx={{height: 180, maxWidth:400 }}
-                            image={game.background_image} />
+                            image={results.background_image} />
                        <CardContent>
                             <Typography variant='h6' fontWeight='bold' 
                                 textAlign='center'>
-                                {game.name}
+                                {results.name}
                             </Typography>
                         </CardContent>
                        <CardActions style={{justifyContent:'center'}}>
-                            <Link to={`/GameDetails/${game.id} `}>;
-                            <button>Details</button>
+                            <Link to={`/GameDetails/${results.id} `}>;
+                            <button className='loader' >Details</button>
                             </Link>
                          </CardActions>      
                         </Card>
                          ))}
                     </div>
-        </div>
+                    <button onClick={handLoad}>Load Another Page</button>
+        </div>         
+        
     )
 }
 

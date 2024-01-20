@@ -46,7 +46,7 @@ const LoadGames = (props) => {
     return  (
             <div>
                  <h1>Your Favorite Games</h1>
-            
+                  
                     <div className='card'style={{ display: 'flex', flexWrap:'wrap', justifyContent: 'space-evenly'}}>
                         {games.map((game) => (
                         <Card  key={game.id} sx={{maxwidth:300, 
