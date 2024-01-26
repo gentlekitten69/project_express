@@ -32,17 +32,24 @@ const PopularGames = (props) => {
     }, [URL, page]);
 
 
-    const handLoad = () => {
-        setPage(prevPage => prevPage + 1)
+    const handlePrevPage = () => {
+        setGames([]);
+        setPage(page - 1)
     };
+ 
+    const handleLoadNewPage = () => {
+        setGames([]);
+        setPage(page + 1) 
+    };
+   
 
     return (
         <div>
-          <h1>New Games!</h1>
+          <h1 style={{fontSize:'70px'}}>New Games!</h1>
             <div className='card'style={{ display: 'flex', flexWrap:'wrap', justifyContent: 'space-evenly'}}>
                         {games.map((results) => (
                         <Card  key={results.id} sx={{maxwidth:300, 
-                            margin: '16px', backgroundColor:'blueviolet'}}>
+                            margin: '16px', backgroundColor:'#ecc30b'}}>
                         <CardMedia
                             component='img'
                             alt= {results.name}
@@ -55,14 +62,17 @@ const PopularGames = (props) => {
                             </Typography>
                         </CardContent>
                        <CardActions style={{justifyContent:'center'}}>
-                            <Link to={`/GameDetails/${results.id} `}>;
-                            <button className='loader' >Details</button>
+                            <Link to={`/GameDetails/${results.id} `}>
+                            <button className='loader'>Details</button>
                             </Link>
                          </CardActions>      
                         </Card>
                          ))}
                     </div>
-                    <button onClick={handLoad}>Load Another Page</button>
+                    <div>
+                    <button className="page" onClick={handlePrevPage}>Previous Page</button>
+                   <button className="page" onClick={handleLoadNewPage}>Next Page</button>
+                  </div>
         </div>         
         
     )

@@ -1,21 +1,22 @@
 import React from "react";
-import { BrowserRouter as Router, Routes,Route, Link} from 'react-router-dom';
-import LoadGames from "../Function/LoadGames";
+import { Routes,Route, Link} from 'react-router-dom';
 import PopularGames from "../Function/Popular";
 import Genre from  '../Function/Genre';
+import LoadGames from "../Function/LoadGames";
 
 
 const NavBar = () => {
     return ( 
-       <div className="">
-            <a href="/" className="site-title"> Gaming Library</a>
-            <li className="site-title"><Link to='/Popular'>New Games</Link></li>
-            <li className="site-title"><Link to='/Genre'>Different Genre</Link></li>
+       <nav  className='link' style = {{ background: 'yellow', height: '50px'}}>
+          <li className="title"><Link to= '/LoadGames' style={{fontSize: '30px'}}>Home</Link></li>
+            <li className='title'><Link to='/Popular' style={{fontSize: '30px'}}>New Games</Link></li>
+            <li className="title"><Link to='/Genre' style={{fontSize: '30px'}}>Different Genre</Link></li>
              <Routes>
+              <Route path='/LoadGames' element={<LoadGames />}>Home</Route>
                <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
                <Route  path="/:genre" element={<Genre />}/>
             </Routes>         
-        </div>
+        </nav>
         
     )
 }

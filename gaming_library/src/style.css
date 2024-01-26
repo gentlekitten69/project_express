@@ -11,51 +11,46 @@ button {
 }
 
 button:hover {
-    background-color: midnightblue;
+    background-color: rgb(167, 167, 212);
 }
-
-
 
  h1 {
     font-weight:  bolder;
     text-align: center;
   }  
 
-.loader {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50vh;
-    margin: 0 0 0 30%;
-}
-
-* {
-    margin: 1;
-    padding: 1;
-    box-sizing: box;
-    font-family: 'Courier New', Courier, monospace;
-}
-
 body {
-    background: #1e06a583;
+    background: #9c1e0d;
     height: 100vh;
     overflow-y: auto;
   }
 
-  .site-title {
-    position: sticky;
-    background-color: rgba(11, 145, 89, 0.432);
-    color: rgb(17, 16, 16);
-    display: inline-flex;
-    justify-content:space-evenly;
-    align-items: center;
-    gap: 10rem;
-    padding: 1px;
-    height: 75px;
-    width: 627px
+  .title {
+    position: relative;
+    background-color: #ecc30b;
+    color: yellow;
+    display: flex;
+    justify-content:space-between;
+    all: unset;
+    gap: 50%;
+    padding: 217px;
+    height: 60px;
+    width: 650px
+  }
+  
+
+  card {
+    background-color: #ecc30b;
   }
 
-  
+  .page {
+    flex: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 10%;
+    margin-left: 400px;
+}
+
 
 
 

@@ -10,11 +10,13 @@ import NavBar from "./Display/NavBar";
 function App() {
  
   return (
+
+  
     <div className="App">
-    <header> 
-      <NavBar />
-    </header>
-   
+      <div> 
+        <NavBar />
+      </div>  
+        
       <Routes>
        <Route path='/' Component={LoadGames} />
         <Route path= "/GameDetails/:id" element={<GameDetails />} />

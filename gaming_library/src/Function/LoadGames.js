@@ -13,6 +13,7 @@ import {  Link } from 'react-router-dom';
 const LoadGames = (props) => {
     const [games, setGames] = useState([]);
      const [page, setPage] = useState(1);
+    
 
     const url = `https://api.rawg.io/api/games?&key=ef855fc72b30488f8dc0e80014dbfc6a&ordering=-metacritic&page=${page}`;
 
@@ -37,20 +38,25 @@ const LoadGames = (props) => {
  
    
               
-    const handleLoadMore = () => {
-        setPage(prevPage => prevPage + 1)
+    const handlePrevPage = () => {
+        setGames([]);
+        setPage(page - 1)
     };
  
+    const handleLoadNewPage = () => {
+        setGames([]);
+        setPage(page + 1);
+    };
    
 
     return  (
             <div>
-                 <h1>Your Favorite Games</h1>
+                 <h1 style={{fontSize:'80px'}}>Unlimited Games</h1>
                   
                     <div className='card'style={{ display: 'flex', flexWrap:'wrap', justifyContent: 'space-evenly'}}>
                         {games.map((game) => (
                         <Card  key={game.id} sx={{maxwidth:300, 
-                            margin: '16px', backgroundColor:'blueviolet'}}>
+                            margin: '16px', backgroundColor:'#ecc30b'}}>
                         <CardMedia
                             component='img'
                             alt= {game.name}
@@ -70,7 +76,8 @@ const LoadGames = (props) => {
                         </Card>
                          ))}
                     </div>
-                   <button className="loader" onClick={handleLoadMore}>Load Games</button>
+                     <button className="page" onClick={handlePrevPage}>Previous Page</button>
+                     <button className="page" onClick={handleLoadNewPage}>Load New Page</button>
                 </div> 
       );
     }                          
