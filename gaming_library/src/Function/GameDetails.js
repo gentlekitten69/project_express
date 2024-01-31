@@ -43,12 +43,14 @@ const GameDetails = () => {
                    </li>
                  ))}
                  </ul>
-                 <Commentssection />
                </div>
             ) : ( <p>Loading</p>)}
-       
+        
+            <Commentssection />
+        
         </div>
     )
+
 }
 
 

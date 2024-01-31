@@ -10,6 +10,8 @@ import {  Link } from 'react-router-dom';
 
 
 
+
+
 const LoadGames = (props) => {
     const [games, setGames] = useState([]);
      const [page, setPage] = useState(1);
@@ -52,15 +54,14 @@ const LoadGames = (props) => {
     return  (
             <div>
                  <h1 style={{fontSize:'80px'}}>Unlimited Games</h1>
-                  
-                    <div className='card'style={{ display: 'flex', flexWrap:'wrap', justifyContent: 'space-evenly'}}>
+                    <div className='card'style={{ display: 'inline-flex', flexWrap:'wrap', justifyContent: 'space-evenly'}}>
                         {games.map((game) => (
-                        <Card  key={game.id} sx={{maxwidth:300, 
+                        <Card  key={game.id} sx={{maxwidth:200, 
                             margin: '16px', backgroundColor:'#ecc30b'}}>
                         <CardMedia
                             component='img'
                             alt= {game.name}
-                            sx={{height: 180, maxWidth:400 }}
+                            sx={{height: 170, maxWidth:500}}
                             image={game.background_image} />
                        <CardContent>
                             <Typography variant='h6' fontWeight='bold' 
@@ -69,7 +70,7 @@ const LoadGames = (props) => {
                             </Typography>
                         </CardContent>
                        <CardActions style={{justifyContent:'center'}}>
-                            <Link to={`/GameDetails/${game.id} `}>;
+                            <Link to={`/GameDetails/${game.id} `}>
                             <button>Details</button>
                             </Link>
                          </CardActions>      

@@ -1,21 +1,26 @@
 import React from "react";
-import { Routes,Route, Link} from 'react-router-dom';
+import { Routes,Route, NavLink} from 'react-router-dom';
 import PopularGames from "../Function/Popular";
 import Genre from  '../Function/Genre';
 import LoadGames from "../Function/LoadGames";
+import Registration from "../Function/Registration";
 
 
 const NavBar = () => {
     return ( 
-       <nav  className='link' style = {{ background: 'yellow', height: '50px'}}>
-          <li className="title"><Link to= '/LoadGames' style={{fontSize: '30px'}}>Home</Link></li>
-            <li className='title'><Link to='/Popular' style={{fontSize: '30px'}}>New Games</Link></li>
-            <li className="title"><Link to='/Genre' style={{fontSize: '30px'}}>Different Genre</Link></li>
-             <Routes>
+       <nav  className='link' >
+          <ul style={{  display: 'inline-flex', aligncontent: 'space-between'}}>
+            <li className="title"><NavLink to= '/LoadGames' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>Home</NavLink></li>
+            <li className='title'><NavLink to='/Popular' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>New Games</NavLink></li>
+            <li className="title"><NavLink to='/Genre' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>Different Genre</NavLink></li>
+            <li className="title"><NavLink to='/Registration' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>Register</NavLink></li>
+          </ul>   
+           <Routes>
               <Route path='/LoadGames' element={<LoadGames />}>Home</Route>
-               <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
-               <Route  path="/:genre" element={<Genre />}/>
-            </Routes>         
+              <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
+              <Route  path="/:genre" element={<Genre />}/>
+              <Route path='/Registration' element={<Registration />}> Resgister </Route>
+          </Routes>         
         </nav>
         
     )

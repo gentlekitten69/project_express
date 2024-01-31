@@ -1,5 +1,3 @@
-
-
 button {
     margin-top: 8px;
     padding: 8px;
@@ -21,26 +19,27 @@ button:hover {
 
 body {
     background: #9c1e0d;
-    height: 100vh;
+    height: auto;
     overflow-y: auto;
   }
 
   .title {
-    position: relative;
+    position: static;
     background-color: #ecc30b;
     color: yellow;
-    display: flex;
+    display: flexbox;
     justify-content:space-between;
     all: unset;
-    gap: 50%;
-    padding: 217px;
-    height: 60px;
-    width: 650px
+    gap: 10%;
+    padding: 10px 400px 20px 60px ;
+    width: 50px;
+    height: 0
   }
   
 
-  card {
+  card{
     background-color: #ecc30b;
+   
   }
 
   .page {
@@ -51,7 +50,8 @@ body {
     margin-left: 400px;
 }
 
-
-
-
+.box {
+ padding: 300px 100px 100px 600px;
+ height: max-content
+}
 

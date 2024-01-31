@@ -8,7 +8,6 @@ const Commentssection= () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({
     id: shortid.generate(),
-    title:'',
     content:''
   });
  
@@ -18,6 +17,7 @@ const Commentssection= () => {
     const fetchComments = async () => {
         try {
             const response = await axios.get('http://localhost:3001/comments')
+            
             setComments(response.data)
         } catch (error) {
             console.error('Error')
@@ -25,6 +25,7 @@ const Commentssection= () => {
     };
     fetchComments();
   },[])
+
 
  
 
@@ -34,12 +35,12 @@ const Commentssection= () => {
 
   const handleAddComment = async () => {
    try {
-        const response = await axios.post('http://localhost:3001/comments', newComment)
+        const response = await axios.post('http://localhost:3001/games/comments', newComment)
    
    
-        setComments([...comments, response.data]);
+        setComments((prevComments) => [...prevComments, response.data]);
 
-        setNewComment({ id: shortid.generate(), title: '', content:''});
+        setNewComment({  id: shortid.generate(), content:''});
     } catch (error) {
         console.error('Error')
     }
@@ -61,16 +62,10 @@ const Commentssection= () => {
             <h2>Comments</h2>
             <ul>
                {comments.map((comment) => (
-                <li > <strong>{comment.id}:</strong>   {comment.title}: {comment.content} <button onClick={() => handleDelete(comment.id)}>Delete</button></li>
+                <li key={shortid.generate()}><strong>{comment.id}</strong>{comment.content} <button onClick={() => handleDelete(comment.id)}>Delete</button></li>
                ))}
             </ul>
-            <input 
-                type='text'
-                placeholder='Title'
-                name= 'title'
-                value={newComment.title}
-                onChange={handleCommentChange}
-             />
+      
              <input 
                 type='text'
                 placeholder='content'
