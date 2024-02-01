@@ -7,8 +7,9 @@ const Commentssection= () => {
    
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({
-    id: shortid.generate(),
-    content:''
+    name:'',
+    content:'',
+    id: ''
   });
  
    
@@ -42,7 +43,7 @@ const Commentssection= () => {
    
         setComments((prevComments) => [...prevComments, response.data]);
 
-        setNewComment({  id: shortid.generate(), content:''});
+        setNewComment({  name: '', content:'', id:''});
     } catch (error) {
         console.error('Error')
     }
@@ -50,7 +51,7 @@ const Commentssection= () => {
     
     const handleDelete = async (commentId) => {
         try {
-            await axios.delete(`http://localhost:3001/comments`);
+            await axios.delete(`http://localhost:3001/games/comments`);
 
             setComments(comments.filter((comment) => comment.id !== commentId));
         } catch (error) {
@@ -63,11 +64,20 @@ const Commentssection= () => {
         <div>
             <h2>Comments</h2>
             <ul>
-               {comments.map((comment) => (
-                <li key={shortid.generate()}><strong>{comment.id}</strong>{comment.content} <button onClick={() => handleDelete(comment.id)}>Delete</button></li>
+               {comments.map((comments) => (
+                <li><strong>{comments.name}</strong> :  {comments.content}   
+                {comments.id}
+                <button onClick={() => handleDelete(comments.id)}>Delete</button></li>
                ))}
             </ul>
-      
+             <input
+                 type= 'text'
+                 placeholder='username'
+                 name='name'
+                 value={newComment.name} 
+                 onChange={handleCommentChange}
+             />   
+
              <input 
                 type='text'
                 placeholder='content'

@@ -21,11 +21,7 @@ const pool = new Pool ({
     port: 5432
 })
 
-pool.connect();
 
-pool.query('SELECT * FROM comments', (err, res) => {
-
-})
 
 let comments = [
     { id: 1, content: 'Comment 1', comments:[]},
@@ -42,11 +38,9 @@ app.use((req, res, next) => {
 
 app.get('/games/comments', async (req, res ) => {
     
-  
-    
-    try {
-        const { rows } = await pool.query('SELECT content FROM comments')
-        
+try {
+        const { rows } = await pool.query('SELECT name,content, id FROM comments')
+       
         res.json(rows);
     } catch (error) {
         console.error('Error')
@@ -56,31 +50,37 @@ app.get('/games/comments', async (req, res ) => {
 
 
 app.post('/games/comments', async (req, res) => {
-   const newComment = { 
-    id: shortid.generate(),
-   content: req.body.content, 
+   
+    const newComment = { 
+     name: req.body.name,
+     content: req.body.content,
+     
      };
 
    try {
-        await pool.query('INSERT INTO comments( id, content ) VALUES ($1, $2) ', [
-            newComment.id,
-           newComment.content
+        await pool.query('INSERT INTO comments( name, content ) VALUES ($1, $2) ', [
+           newComment.name,
+           newComment.content,
         ]);
-     
+        
         res.status(201).json(newComment);
+        console.log(newComment)
    } catch (error) {
         console.error('Error', error)
    }
   
 });
 
-app.delete('/comments', async (req, res) => {
-    const { id } = req.params;
-
-    await pool.query('DELETE FROM comments')
-    // comments = comments.filter(comment => comment.id !== id);
-    res.status(204).send();
-
+app.delete(`/games/comments`, async (req, res) => {
+  
+        const { id } = req.params;
+      
+       
+        await pool.query('DELETE FROM comments')
+         
+        comments = comments.filter(comment => comment.id !== id);
+        res.status(204).send();
+    
 })
 
 app.post('/resgister', async (req, res) => {
