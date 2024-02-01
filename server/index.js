@@ -41,12 +41,13 @@ app.use((req, res, next) => {
 
 
 app.get('/games/comments', async (req, res ) => {
-    const gameId = parseInt(req.params.id);
+    
   
     
     try {
-        const { row } = await pool.query('SELECT content FROM comments')
-        res.json(row);
+        const { rows } = await pool.query('SELECT content FROM comments')
+        
+        res.json(rows);
     } catch (error) {
         console.error('Error')
         res.status(500).json({error: 'Server Error'});
@@ -56,14 +57,14 @@ app.get('/games/comments', async (req, res ) => {
 
 app.post('/games/comments', async (req, res) => {
    const newComment = { 
+    id: shortid.generate(),
    content: req.body.content, 
-    gameId: req.body.gameId };
+     };
 
    try {
-        await pool.query('INSERT INTO comments( comment, content ) VALUES ($1, $2) RETURNING *', [
-           newComment.comment,
-           newComment.content,
-         
+        await pool.query('INSERT INTO comments( id, content ) VALUES ($1, $2) ', [
+            newComment.id,
+           newComment.content
         ]);
      
         res.status(201).json(newComment);
@@ -73,10 +74,11 @@ app.post('/games/comments', async (req, res) => {
   
 });
 
-app.delete('/comments/:id', (req, res) => {
+app.delete('/comments', async (req, res) => {
     const { id } = req.params;
 
-    comments = comments.filter(comment => comment.id !== id);
+    await pool.query('DELETE FROM comments')
+    // comments = comments.filter(comment => comment.id !== id);
     res.status(204).send();
 
 })

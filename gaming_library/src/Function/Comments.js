@@ -16,9 +16,11 @@ const Commentssection= () => {
   useEffect(() => {
     const fetchComments = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/comments')
-            
+            const response = await axios.get('http://localhost:3001/games/comments')
+            console.log('test one')
+            console.log(response.data)
             setComments(response.data)
+            
         } catch (error) {
             console.error('Error')
         }
@@ -48,7 +50,7 @@ const Commentssection= () => {
     
     const handleDelete = async (commentId) => {
         try {
-            await axios.delete(`http://localhost:3001/comments/${commentId}`);
+            await axios.delete(`http://localhost:3001/comments`);
 
             setComments(comments.filter((comment) => comment.id !== commentId));
         } catch (error) {
