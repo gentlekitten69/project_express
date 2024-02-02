@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import shortid from 'shortid'
+import { useParams } from 'react-router-dom';
+
 
 
 const Commentssection= () => {
    
+  const { id:gameid, id } = useParams();  
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({
     name:'',
     content:'',
-    id: ''
+    gameid: parseInt(gameid),
   });
  
    
@@ -17,7 +19,7 @@ const Commentssection= () => {
   useEffect(() => {
     const fetchComments = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/games/comments')
+            const response = await axios.get(`http://localhost:3001/games/comments/${gameid}`)
             console.log('test one')
             console.log(response.data)
             setComments(response.data)
@@ -27,23 +29,21 @@ const Commentssection= () => {
         }
     };
     fetchComments();
-  },[])
+  },[gameid])
+  
 
-
- 
-
-  const handleCommentChange = (e) => {
-    setNewComment({...newComment, [e.target.name]: e.target.value })
+    const handleCommentChange = (e) => {
+        setNewComment({...newComment, [e.target.name]: e.target.value })
   }
 
   const handleAddComment = async () => {
    try {
-        const response = await axios.post('http://localhost:3001/games/comments', newComment)
+        const response = await axios.post(`http://localhost:3001/games/comments/${gameid}`, newComment)
    
    
         setComments((prevComments) => [...prevComments, response.data]);
 
-        setNewComment({  name: '', content:'', id:''});
+        setNewComment({  name: '', content:''});
     } catch (error) {
         console.error('Error')
     }
@@ -65,8 +65,7 @@ const Commentssection= () => {
             <h2>Comments</h2>
             <ul>
                {comments.map((comments) => (
-                <li><strong>{comments.name}</strong> :  {comments.content}   
-                {comments.id}
+                <li><strong>{comments.name}</strong> :  {comments.content}   {comments.id}
                 <button onClick={() => handleDelete(comments.id)}>Delete</button></li>
                ))}
             </ul>

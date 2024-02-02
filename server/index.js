@@ -2,9 +2,9 @@ const express = require ('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const { Pool } = require('pg');
-const shortid = require('shortid')
 
-const unique = shortid.generate();
+
+
 const app = express();
 const port = 3001;
 
@@ -36,10 +36,10 @@ app.use((req, res, next) => {
 
 
 
-app.get('/games/comments', async (req, res ) => {
+app.get('/games/comments/:id', async (req, res ) => {
     
 try {
-        const { rows } = await pool.query('SELECT name,content, id FROM comments')
+        const { rows } = await pool.query('SELECT name,content,gameid FROM comments ')
        
         res.json(rows);
     } catch (error) {
@@ -49,18 +49,20 @@ try {
 })
 
 
-app.post('/games/comments', async (req, res) => {
+app.post('/games/comments/:id', async (req, res) => {
    
     const newComment = { 
      name: req.body.name,
      content: req.body.content,
+     gameid: req.body.gameid
      
      };
 
    try {
-        await pool.query('INSERT INTO comments( name, content ) VALUES ($1, $2) ', [
+        await pool.query('INSERT INTO comments( name, content, gameid ) VALUES ($1, $2, $3) ', [
            newComment.name,
            newComment.content,
+           newComment.gameid
         ]);
         
         res.status(201).json(newComment);

@@ -7,6 +7,7 @@ import Commentssection from "./Comments";
 const GameDetails = () => {
      const { id } = useParams();
     const [games, setGame] = useState('');
+    
     useEffect(() => {
         const fetchGameDetails = async () => {
             try {
