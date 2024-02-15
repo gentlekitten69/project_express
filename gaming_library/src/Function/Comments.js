@@ -4,24 +4,24 @@ import { useParams } from 'react-router-dom';
 
 
 
-const Commentssection= () => {
+
+const Comments= () => {
    
-  const { id:gameid, id } = useParams();  
+  const { gameId } = useParams();  
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({
     name:'',
     content:'',
-    gameid: parseInt(gameid),
-  });
+    gameId: parseInt(gameId),
+   });
  
    
     
   useEffect(() => {
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/games/comments/${gameid}`)
-            console.log('test one')
-            console.log(response.data)
+            const response = await axios.get(`http://localhost:3001/games/comments/${gameId}`)
+            console.log("reponse.data: ", response.data);
             setComments(response.data)
             
         } catch (error) {
@@ -29,7 +29,7 @@ const Commentssection= () => {
         }
     };
     fetchComments();
-  },[gameid])
+  },[gameId])
   
 
     const handleCommentChange = (e) => {
@@ -38,12 +38,14 @@ const Commentssection= () => {
 
   const handleAddComment = async () => {
    try {
-        const response = await axios.post(`http://localhost:3001/games/comments/${gameid}`, newComment)
+        const response = await axios.post(`http://localhost:3001/games/comments/newcomment`, newComment)
+
+        console.log("add comment response.data", response.data);
    
    
         setComments((prevComments) => [...prevComments, response.data]);
 
-        setNewComment({  name: '', content:''});
+        setNewComment({  name: '', content:'', gameId: parseInt(gameId)});
     } catch (error) {
         console.error('Error')
     }
@@ -51,9 +53,9 @@ const Commentssection= () => {
     
     const handleDelete = async (commentId) => {
         try {
-            await axios.delete(`http://localhost:3001/games/comments`);
+            await axios.delete(`http://localhost:3001/games/comments/${commentId}`);
 
-            setComments(comments.filter((comment) => comment.id !== commentId));
+            setComments(comments.filter((comment) => commentId !== comment.id));
         } catch (error) {
             console.error('Error Deleting Comment', error)
         }
@@ -64,9 +66,9 @@ const Commentssection= () => {
         <div>
             <h2>Comments</h2>
             <ul>
-               {comments.map((comments) => (
-                <li><strong>{comments.name}</strong> :  {comments.content}   {comments.id}
-                <button onClick={() => handleDelete(comments.id)}>Delete</button></li>
+               {comments.map((comment) => (
+                <li key={comment.id}><strong>{comment.name}</strong> :  {comment.content}  
+                <button onClick={(e) => handleDelete(comment.id)}>Delete</button></li>
                ))}
             </ul>
              <input
@@ -91,4 +93,4 @@ const Commentssection= () => {
 }
     
 
-export default Commentssection;
+export default Comments;

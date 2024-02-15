@@ -9,7 +9,7 @@ const app = express();
 const port = 3001;
 
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
@@ -24,9 +24,9 @@ const pool = new Pool ({
 
 
 let comments = [
-    { id: 1, content: 'Comment 1', comments:[]},
-    { id: 2, content: 'comment 2', comments:[]},
-    { id: 3, content: 'comment 3', comments:[]}
+    { name:'', content: '' },
+    { name: '', content: ''},
+    { name: '', content: ''}
 ];
 
 app.use((req, res, next) => {
@@ -36,11 +36,15 @@ app.use((req, res, next) => {
 
 
 
-app.get('/games/comments/:id', async (req, res ) => {
+app.get(`/games/comments/:gameId`, async (req, res ) => {
     
-try {
-        const { rows } = await pool.query('SELECT name,content,gameid FROM comments ')
-       
+    try {
+        const text = 'SELECT * FROM comments WHERE gameid = $1';
+        console.log("server received params", req.params.gameId)
+        const values = [req.params.gameId];
+        
+        const { rows } = await pool.query(text, values);
+        console.log("resulting rows", rows);
         res.json(rows);
     } catch (error) {
         console.error('Error')
@@ -49,61 +53,47 @@ try {
 })
 
 
-app.post('/games/comments/:id', async (req, res) => {
-   
+app.post('/games/comments/newcomment', async (req, res) => {
     const newComment = { 
-     name: req.body.name,
-     content: req.body.content,
-     gameid: req.body.gameid
-     
-     };
-
-   try {
-        await pool.query('INSERT INTO comments( name, content, gameid ) VALUES ($1, $2, $3) ', [
-           newComment.name,
-           newComment.content,
-           newComment.gameid
-        ]);
-        
-        res.status(201).json(newComment);
-        console.log(newComment)
-   } catch (error) {
+        name: req.body.name,
+        content: req.body.content,
+        gameId: req.body.gameId
+    };
+    console.log("newComment:", newComment);
+    try {
+        const { rows } = await pool.query(
+            'INSERT INTO comments( name, content, gameid) VALUES ($1, $2, $3) RETURNING *', 
+            [
+                newComment.name,
+                newComment.content,
+                newComment.gameId,
+            ]
+        );
+        console.log("rows from add response", rows)
+        const insertedComment = rows[0]
+        console.log("inserted comment", insertedComment);
+        res.status(201).json(insertedComment);
+    } catch (error) {
         console.error('Error', error)
-   }
-  
+        }
 });
 
-app.delete(`/games/comments`, async (req, res) => {
-  
-        const { id } = req.params;
-      
-       
-        await pool.query('DELETE FROM comments')
-         
-        comments = comments.filter(comment => comment.id !== id);
-        res.status(204).send();
+app.delete(`/games/comments/:commentId`, async (req, res) => {
+    console.log("delete params", req.params)
+    const commentId = parseInt(req.params.commentId, 10);
+
+    console.log('Server Delete:', commentId)
     
-})
-
-app.post('/resgister', async (req, res) => {
-    const { username } = req.body;
-    try {
-        const { rows } = await pool.query('SELECT * FROM registrations WHERE username = $1', [username])
+    try{
+       await pool.query('DELETE FROM comments WHERE id = $1', [commentId]);
+        res.status(204).send();
     } catch (error) {
-        
-    }
-   
-})
-
-app.post('/login', async (req, res) => {
-    const { username } = req.body;
-
-    try {
-        const { rows } = await pool.query('SELECT * FROM resgistrations WHERE username = $1', [username])
-    } catch (error) {
-        
+        console.error('An Error has occured deleting the comment', error)
+        res.status(500).send(`Server Error: ${error.message}`)
     }
 })
+
+
 
 
 

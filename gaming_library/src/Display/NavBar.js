@@ -1,4 +1,5 @@
 import React from "react";
+import '../style.css'
 import { Routes,Route, NavLink} from 'react-router-dom';
 import PopularGames from "../Function/Popular";
 import Genre from  '../Function/Genre';
@@ -8,12 +9,12 @@ import Registration from "../Function/Registration";
 
 const NavBar = () => {
     return ( 
-       <nav  className='link' >
-          <ul style={{  display: 'inline-flex', aligncontent: 'space-between'}}>
-            <li className="title"><NavLink to= '/LoadGames' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>Home</NavLink></li>
-            <li className='title'><NavLink to='/Popular' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>New Games</NavLink></li>
-            <li className="title"><NavLink to='/Genre' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>Different Genre</NavLink></li>
-            <li className="title"><NavLink to='/Registration' style={{fontSize: '30px', textDecoration: 'none', color: 'black' }}>Register</NavLink></li>
+       <nav>
+          <ul className="tab">
+            <a className="title"><NavLink to= '/LoadGames'>Home</NavLink></a>
+            <a className="title"><NavLink to='/Popular' >New Games</NavLink></a>
+            <a className="title"><NavLink to='/Genre'>Different Genre</NavLink></a>
+            <a className="title"><NavLink to='/Registration'>Register</NavLink></a>
           </ul>   
            <Routes>
               <Route path='/LoadGames' element={<LoadGames />}>Home</Route>

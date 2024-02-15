@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import '../style.css';
 import { useParams } from  'react-router-dom';
-import Commentssection from "./Comments";
+import Comments from "./Comments";
 
 
 const GameDetails = () => {
-     const { id } = useParams();
+    const { gameId } = useParams();
     const [games, setGame] = useState('');
     
     useEffect(() => {
         const fetchGameDetails = async () => {
             try {
-                const response = await fetch(`https://api.rawg.io/api/games/${id}?key=ef855fc72b30488f8dc0e80014dbfc6a`);
+                const response = await fetch(`https://api.rawg.io/api/games/${gameId}?key=ef855fc72b30488f8dc0e80014dbfc6a`);
 
                
               if(!response.ok) {
@@ -25,26 +25,30 @@ const GameDetails = () => {
             }
         }
         fetchGameDetails();
-    }, [id]);
+    }, [gameId]);
 
     return (
         <div className="details">
             {games ? (
-               <div>
+               <div key={gameId}>
                <h1>{games.name}</h1>
                <img src={games.background_image} alt={games.name}
                style={{maxWidth:'95%' , height:"40%"}}/>
                <p>Description: {games.description_raw.substr(0, 1200)}</p>
                <p>Ratings:</p>
-               <ul>
+                <ul key={gameId}>
                  {games.ratings.map((result) => (
-                   <li>
-                     {result.title} <br />
-                     {result.percent}%
+                  <li >
+                      <strong>Id:</strong> {result.id}
+                     <br />
+                     <strong>Total Comments:</strong> {result.count} <br />
+                     <strong>Most Commented: </strong> {result.title} <br />
+                     <strong>Overall percentage:</strong> {result.percent}%
                    </li>
+                
                  ))}
                  </ul>
-                 <Commentssection />
+                 <Comments />
                </div>
             ) : ( <p>Loading</p>)}
         
