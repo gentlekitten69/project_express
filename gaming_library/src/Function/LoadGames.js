@@ -12,10 +12,10 @@ import {  Link } from 'react-router-dom';
 
 
 
-const LoadGames = (props) => {
+const LoadGames = () => {
     const [games, setGames] = useState([]);
     const [page, setPage] = useState(1);
-    const url = `https://api.rawg.io/api/games?&key=ef855fc72b30488f8dc0e80014dbfc6a&ordering=-metacritic&page=${page}`;
+    const url = `https://api.rawg.io/api/games?&key=ef855fc72b30488f8dc0e80014dbfc6a&metacritic=85,100&&page=${page}&page_size=16`;
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -24,7 +24,7 @@ const LoadGames = (props) => {
                 const data = await response.json();
 
                 if (data.results) {
-                    setGames((prevGames) => (page === 0 ? data.results : [ ...prevGames, ...data.results]));
+                    setGames((prevGames) => (page === 1 ? data.results : [ ...prevGames, ...data.results]));
                    
                 }
             } catch (error) {

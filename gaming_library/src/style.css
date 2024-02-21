@@ -28,7 +28,7 @@ button {
     color: black;
     display: inline-flex;
     justify-items: stretch;
-    padding: 10px 150px 20px 100px ;
+    padding: 5px 150px 5px 200px ;
     font-size: 40px;
     list-style: none;
     width: auto;
@@ -76,5 +76,9 @@ button {
     background-color: #93A6DF;
     border: 2px solid black;
   }
+
+  /* .description {
+    color: transparent
+  } */
 
 

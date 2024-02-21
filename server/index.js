@@ -1,6 +1,5 @@
 const express = require ('express');
 const cors = require('cors');
-const bodyParser = require("body-parser");
 const { Pool } = require('pg');
 
 
@@ -9,7 +8,6 @@ const app = express();
 const port = 3001;
 
 
-// app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
@@ -92,10 +90,6 @@ app.delete(`/games/comments/:commentId`, async (req, res) => {
         res.status(500).send(`Server Error: ${error.message}`)
     }
 })
-
-
-
-
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

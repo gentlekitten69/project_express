@@ -4,7 +4,7 @@ import { Routes,Route, NavLink} from 'react-router-dom';
 import PopularGames from "../Function/Popular";
 import Genre from  '../Function/Genre';
 import LoadGames from "../Function/LoadGames";
-import Registration from "../Function/Registration";
+
 
 
 const NavBar = () => {
@@ -14,13 +14,11 @@ const NavBar = () => {
             <a className="title"><NavLink to= '/LoadGames'>Home</NavLink></a>
             <a className="title"><NavLink to='/Popular' >New Games</NavLink></a>
             <a className="title"><NavLink to='/Genre'>Different Genre</NavLink></a>
-            <a className="title"><NavLink to='/Registration'>Register</NavLink></a>
           </ul>   
-           <Routes>
-              <Route path='/LoadGames' element={<LoadGames />}>Home</Route>
-              <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
-              <Route  path="/:genre" element={<Genre />}/>
-              <Route path='/Registration' element={<Registration />}> Resgister </Route>
+          <Routes>
+            <Route path='/LoadGames' element={<LoadGames />}>Home</Route>
+            <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
+            <Route  path="/:genre" element={<Genre />}/>
           </Routes>         
         </nav>
         

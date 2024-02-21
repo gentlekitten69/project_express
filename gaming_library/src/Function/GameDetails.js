@@ -13,12 +13,10 @@ const GameDetails = () => {
             try {
                 const response = await fetch(`https://api.rawg.io/api/games/${gameId}?key=ef855fc72b30488f8dc0e80014dbfc6a`);
 
-               
-              if(!response.ok) {
+            if(!response.ok) {
                     alert('Error');
-                }
-
-                const data = await response.json();
+            }
+            const data = await response.json();
                 setGame(data);
             } catch (error) {
                 console.error('An Error has occured')
@@ -31,22 +29,21 @@ const GameDetails = () => {
         <div className="details">
             {games ? (
                <div key={gameId}>
-               <h1>{games.name}</h1>
-               <img src={games.background_image} alt={games.name}
-               style={{maxWidth:'95%' , height:"40%"}}/>
-               <p>Description: {games.description_raw.substr(0, 1200)}</p>
-               <p>Ratings:</p>
-                <ul key={gameId}>
-                 {games.ratings.map((result) => (
-                  <li >
-                      <strong>Id:</strong> {result.id}
-                     <br />
-                     <strong>Total Comments:</strong> {result.count} <br />
-                     <strong>Most Commented: </strong> {result.title} <br />
-                     <strong>Overall percentage:</strong> {result.percent}%
-                   </li>
-                
-                 ))}
+                 <h1>{games.name}</h1>
+                    <img src={games.background_image} alt={games.name}
+                        style={{maxWidth:'95%' , height:"40%"}}/>
+                    <p className="description">Description: {games.description_raw.split('Español')[0]}</p>
+                    <p>Ratings:</p>
+                    <ul key={gameId}>
+                        {games.ratings.map((result) => (
+                <li >
+                    <strong>Id:</strong> {result.id}
+                    <br />
+                    <strong>Total Comments:</strong> {result.count} <br />
+                    <strong>Most Commented: </strong> {result.title} <br />
+                    <strong>Overall percentage:</strong> {result.percent}%
+                </li>
+                ))}
                  </ul>
                  <Comments />
                </div>

@@ -34,7 +34,7 @@ const Comments= () => {
 
     const handleCommentChange = (e) => {
         setNewComment({...newComment, [e.target.name]: e.target.value })
-  }
+    }
 
   const handleAddComment = async () => {
    try {
@@ -71,23 +71,22 @@ const Comments= () => {
                 <button onClick={(e) => handleDelete(comment.id)}>Delete</button></li>
                ))}
             </ul>
-             <input
-                 type= 'text'
-                 placeholder='username'
-                 name='name'
-                 value={newComment.name} 
-                 onChange={handleCommentChange}
-             />   
+            <input
+              type= 'text'
+              placeholder='username'
+              name='name'
+              value={newComment.name} 
+              onChange={handleCommentChange}
+            />   
 
              <input 
-                type='text'
-                placeholder='content'
-                name='content'
-                value={newComment.content}
-                onChange={handleCommentChange}
+              type='text'
+              placeholder='content'
+              name='content'
+              value={newComment.content}
+              onChange={handleCommentChange}
              />
-          
-            <button onClick={handleAddComment}>Add Comment</button>
+             <button onClick={handleAddComment}>Add Comment</button>
         </div>
     )
 }

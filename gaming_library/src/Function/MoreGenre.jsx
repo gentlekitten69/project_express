@@ -30,7 +30,7 @@ const MoreGenre = () => {
       }
     };
     fetchGames()
-  }, [])
+  }, [url])
 
 
   return (
@@ -47,16 +47,16 @@ const MoreGenre = () => {
                   src={game.background_image}
                 />
                  <CardContent>
-                    <Typography variant='h6' fontWeight='bold'
-                      textAlign='center'>
-                      {game.name}
-                    </Typography>
+                  <Typography variant='h6' fontWeight='bold'
+                    textAlign='center'>
+                    {game.name}
+                  </Typography>
                 </CardContent>
                 <CardActions style={{justifyContent:'center'}}>
-                         <Link to={`/GameDetails/${game.id} `}>
-                        <button className='loader'>Details</button>
-                        </Link>
-                    </CardActions>   
+                  <Link to={`/GameDetails/${game.id} `}>
+                    <button className='loader'>Details</button>
+                  </Link>
+                </CardActions>   
             </Card>
           ))}
         </div>

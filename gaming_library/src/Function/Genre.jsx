@@ -20,12 +20,9 @@ const Genre = () => {
     useEffect(() => {
         const fetchGames = async () => {
             try {
-              
-                const response = await axios.get(url);
-                setGames(response.data.results)
-
-               
-                } catch (error) {
+              const response = await axios.get(url);
+              setGames(response.data.results)
+            } catch (error) {
                 console.error('Error fetching games:', error);
             }
         };
@@ -36,33 +33,30 @@ const Genre = () => {
  
     return(
         <div>
-                    <h1 style={{fontSize:'80px'}}>Genre Types</h1>
-                    <div className='card' > 
-                        {games.map((game) => (
-                        <Card  key={game.id} sx={{width:400, 
-                            margin: '16px', backgroundColor:'#449DD1', boxShadow: '5px 15px 5px 5px '}}>
-                             
-                         <CardMedia
-                             component='img'
-                             alt= {game.name}
-                             sx={{maxheight: 80, maxWidth:300}}
-                             image={game.image_background} />
-                         <CardContent>
-                            <Typography variant='h6' fontWeight='bold' 
-                                textAlign='center'>
-                                {game.name}
-                            </Typography>
-                        </CardContent>
-                        <CardActions style={{justifyContent:'center'}}>
-                            <Link to={`/MoreGenre/${game.id} `}>
-                            <button>More Games</button>
-                            </Link>
-                         </CardActions>      
-                        </Card>
-                      
-                      ))}
-                   
-                    </div>
+         <h1 style={{fontSize:'80px'}}>Genre Types</h1>
+           <div className='card' > 
+             {games.map((game) => (
+           <Card  key={game.id} sx={{width:400, 
+             margin: '16px', backgroundColor:'#449DD1', boxShadow: '5px 15px 5px 5px '}}>
+           <CardMedia 
+               component='img'
+               alt= {game.name}
+               sx={{maxheight: 80, maxWidth:300}}
+              image={game.image_background} />
+           <CardContent>
+              <Typography variant='h6' fontWeight='bold' 
+                textAlign='center'>
+                {game.name}
+              </Typography>
+           </CardContent>
+           <CardActions style={{justifyContent:'center'}}>
+           <Link to={`/MoreGenre/${game.id} `}> 
+            <button>More Games</button>
+           </Link>
+           </CardActions>      
+           </Card>
+             ))}
+           </div>
         </div>
     ) 
 }
