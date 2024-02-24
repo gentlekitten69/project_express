@@ -24,10 +24,10 @@ button {
     width: 100%;
   }
 
-.tab, .title {
+.tab {
     color: black;
-    display: inline-flex;
-    justify-items: stretch;
+    display: flex;
+    justify-content: space-between;
     padding: 5px 150px 5px 200px ;
     font-size: 40px;
     list-style: none;

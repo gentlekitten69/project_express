@@ -1,9 +1,10 @@
 import React from "react";
 import '../style.css'
-import { Routes,Route, NavLink} from 'react-router-dom';
+import { Routes,Route} from 'react-router-dom';
 import PopularGames from "../Function/Popular";
 import Genre from  '../Function/Genre';
 import LoadGames from "../Function/LoadGames";
+
 
 
 
@@ -11,15 +12,21 @@ const NavBar = () => {
     return ( 
        <nav>
           <ul className="tab">
-            <a className="title"><NavLink to= '/LoadGames'>Home</NavLink></a>
-            <a className="title"><NavLink to='/Popular' >New Games</NavLink></a>
-            <a className="title"><NavLink to='/Genre'>Different Genre</NavLink></a>
+         
+           <a href="../LoadGames">Home</a>
+           <a href="../Popular">New Games</a>
+           <a href="../Genre">Different Genre</a>
+            {/* <a className="title"><NavLink to= '/LoadGames'>Home</NavLink></a> */}
+            {/* <a className="title"><NavLink to='/Popular' >New Games</NavLink></a> */}
+            {/* <a className="title"><NavLink to='/Genre'>Different Genre</NavLink></a> */}
+           
           </ul>   
           <Routes>
             <Route path='/LoadGames' element={<LoadGames />}>Home</Route>
             <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
             <Route  path="/:genre" element={<Genre />}/>
-          </Routes>         
+          </Routes>     
+        
         </nav>
         
     )
