@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 const PopularGames = () => {
     const [games, setGames] = useState([{}]);
     const [page, setPage] = useState(1)
-    const url = `https://api.rawg.io/api/games?dates=2023-01-01,2023-12-31&ordering=-added&page=${page}&page_size=13&key=ef855fc72b30488f8dc0e80014dbfc6a`
+    const url = `https://api.rawg.io/api/games?dates=2023-01-01,2023-12-31&page=${page}&key=ef855fc72b30488f8dc0e80014dbfc6a&page_size=16`
    
    
     useEffect(() => {
@@ -47,14 +47,14 @@ const PopularGames = () => {
     return (
         <div>
           <h1 style={{fontSize:'80px'}}>Recently Released Games</h1>
-            <div className='card'>
+            <div class='card'>
                 {games.map((game) => (
-            <Card  key={game.id} sx={{maxwidth:310, 
+            <Card  key={game.id} sx={{maxwidth:400, 
                     margin: '16px', backgroundColor:'#449DD1', boxShadow:'5px 15px 5px 5px'}}>
             <CardMedia
                 component='img'
                 alt= {game.name}
-                sx={{height: 180, maxWidth:350 }}
+                sx={{height: 180, maxWidth:400 }}
                 image={game.background_image} />
             <CardContent>
                 <Typography variant='h6' fontWeight='bold' 

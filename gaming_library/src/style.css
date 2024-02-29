@@ -28,7 +28,7 @@ button {
     color: black;
     display: flex;
     justify-content: space-between;
-    padding: 5px 150px 5px 200px ;
+    padding: 5px 250px 5px 200px ;
     font-size: 40px;
     list-style: none;
     width: auto;
@@ -36,7 +36,7 @@ button {
   
 
   
-   .card {
+.card {
     justify-content: space-evenly;
     display: inline-flex;
     flex-wrap: wrap;
@@ -77,8 +77,13 @@ button {
     border: 2px solid black;
   }
 
-  /* .description {
-    color: transparent
-  } */
-
+ .container{
+  position: absolute;
+  right: 50px;
+ }
+ 
+ input{
+  height: 30px
+  
+ }
 

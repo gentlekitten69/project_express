@@ -7,16 +7,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {  Link } from 'react-router-dom';
 
-
-
-
-
-
-
 const LoadGames = () => {
     const [games, setGames] = useState([]);
     const [page, setPage] = useState(1);
-    const url = `https://api.rawg.io/api/games?&key=ef855fc72b30488f8dc0e80014dbfc6a&metacritic=85,100&&page=${page}&page_size=16`;
+    const url = `https://api.rawg.io/api/games?&key=ef855fc72b30488f8dc0e80014dbfc6a&metacritic=75,100&page=${page}&page_size=16`;
 
     useEffect(() => {
         const fetchGames = async () => {
