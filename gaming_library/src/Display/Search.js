@@ -30,8 +30,12 @@ const Search = () => {
 
        const handleInput = (event) => {
         setSearchValue(event.target.value)
-        setUserInput(true)
-     }
+        setUserInput(true )
+       }
+
+       const handleSelected = () => {
+        setSearchValue('')
+       }
 
        
    return (
@@ -42,11 +46,11 @@ const Search = () => {
             onChange={handleInput}
             placeholder='Search'
         />
-        {searchValue !== '' && results.length !== 0 && (
+        {searchValue !== '' && results.length !== 0 &&(
          <div class='container'
             style={{backgroundColor:'gray'}}>  
            {results.map((game) => (
-            <div key={game.id} value = {game.id}>
+            <div key={game.id} value = {game.id} onClick={() => handleSelected(game.id)}>
                 {game.name} 
                 <Link to={`/GameDetails/${game.id}`}>
                 <button>Details</button>

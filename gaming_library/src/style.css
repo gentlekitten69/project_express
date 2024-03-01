@@ -37,7 +37,7 @@ button {
 
   
 .card {
-    justify-content: space-evenly;
+    justify-content: space-around;
     display: inline-flex;
     flex-wrap: wrap;
     

@@ -47,7 +47,6 @@ const LoadGames = () => {
     return  (
             <div>
                  <h1 style={{fontSize:'80px'}}>Unlimited Games</h1>
-               
                     <div className='card' > 
                         {games.map((game) => (
                         <Card  key={game.id} sx={{width:400, 
