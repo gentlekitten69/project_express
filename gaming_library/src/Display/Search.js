@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Search = () => {
     const [searchValue, setSearchValue ] = useState('')
     const [ results, setResults ] = useState([])
-    const [ userInput, setUserInput ] = useState(false)
+    // const [ userInput, setUserInput ] = useState(false)
    
 
     const url = `https://api.rawg.io/api/games?key=ef855fc72b30488f8dc0e80014dbfc6a&page=2&search=${searchValue}`
@@ -23,14 +23,11 @@ const Search = () => {
                 console.error('Error fetching games:', error)
                 }
             };
-            if (userInput) {
               fetchGames()   
-            }
-       }, [ url, setSearchValue, userInput])   
+       }, [ url, setSearchValue])   
 
        const handleInput = (event) => {
         setSearchValue(event.target.value)
-        setUserInput(true )
        }
 
        const handleSelected = () => {
