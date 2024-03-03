@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 const Search = () => {
     const [searchValue, setSearchValue ] = useState('')
     const [ results, setResults ] = useState([])
-    // const [ userInput, setUserInput ] = useState(false)
    
-
     const url = `https://api.rawg.io/api/games?key=ef855fc72b30488f8dc0e80014dbfc6a&page=2&search=${searchValue}`
 
     useEffect(() => {
@@ -24,7 +22,7 @@ const Search = () => {
                 }
             };
               fetchGames()   
-       }, [ url, setSearchValue])   
+       }, [url])   
 
        const handleInput = (event) => {
         setSearchValue(event.target.value)
@@ -47,10 +45,10 @@ const Search = () => {
          <div class='container'
             style={{backgroundColor:'gray'}}>  
            {results.map((game) => (
-            <div key={game.id} value = {game.id} onClick={() => handleSelected(game.id)}>
+            <div key={game.id} value={game.id} onClick={() => handleSelected(game.id)}>
                 {game.name} 
                 <Link to={`/GameDetails/${game.id}`}>
-                <button>Details</button>
+                    <button>Details</button>
                 </Link>
              </div> 
            ))}   

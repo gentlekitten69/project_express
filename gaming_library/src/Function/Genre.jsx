@@ -41,7 +41,7 @@ const Genre = () => {
            <CardMedia 
                component='img'
                alt= {game.name}
-               sx={{maxheight: 80, maxWidth:300}}
+               sx={{maxheight: '50', maxWidth:500}}
               image={game.image_background} />
            <CardContent>
               <Typography variant='h6' fontWeight='bold' 

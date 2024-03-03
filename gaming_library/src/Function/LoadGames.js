@@ -10,7 +10,7 @@ import {  Link } from 'react-router-dom';
 const LoadGames = () => {
     const [games, setGames] = useState([]);
     const [page, setPage] = useState(1);
-    const url = `https://api.rawg.io/api/games?&key=ef855fc72b30488f8dc0e80014dbfc6a&metacritic=75,100&page=${page}&page_size=16`;
+    const url = `https://api.rawg.io/api/games?&key=ef855fc72b30488f8dc0e80014dbfc6a&metacritic=75,100&page=${page}&page_size=15`;
 
     useEffect(() => {
         const fetchGames = async () => {

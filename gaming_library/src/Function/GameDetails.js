@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../style.css';
 import { useParams } from  'react-router-dom';
 import Comments from "./Comments";
+import Card from 'react-bootstrap/Card';
 
 
 const GameDetails = () => {
@@ -26,32 +27,39 @@ const GameDetails = () => {
     }, [gameId]);
 
     return (
-        <div className="details">
-            {games ? (
-               <div key={gameId}>
-                 <h1>{games.name}</h1>
-                    <img src={games.background_image} alt={games.name}
-                        style={{maxWidth:'95%' , height:"40%"}}/>
-                    <p className="description">Description: {games.description_raw.split('Español')[0]}</p>
-                    <p>Ratings:</p>
+        <Card class="container">
+            {/* <h1>{games.name}</h1> */}
+            {games ? ( 
+               <div key={gameId} style={{display:'flex', flexDirection:'row'}}>
+                    <Card.Img src={games.background_image} alt={games.name}
+                        style={{maxWidth:'30%' , height:"79rem", padding:'24px 0 0 0 '}}/>
+                    <Card.Text className="description" style={{fontSize:'25px'}}>
+                        <h1>{games.name}</h1>
+                       <strong>Description:</strong> {games.description_raw.split('Español')[0]}
+                    </Card.Text>
                     <ul key={gameId}>
-                        {games.ratings.map((result) => (
-                <li >
-                    <strong>Id:</strong> {result.id}
-                    <br />
-                    <strong>Total Comments:</strong> {result.count} <br />
-                    <strong>Most Commented: </strong> {result.title} <br />
-                    <strong>Overall percentage:</strong> {result.percent}%
-                </li>
-                ))}
+                    <Card.Body> 
+                    <p style={{fontSize:'30px'}}>Ratings:</p>
+                    {games.ratings.map((result) => (
+                     <li style={{fontSize:'25px', fontFamily:'sans-serif'}}>
+                      <strong>Id:</strong> {result.id}
+                      <br />
+                      <strong>Total Comments:</strong>  {result.count} <br />
+                      <strong>Most Commented: </strong>  {result.title} <br />
+                      <strong>Overall percentage:</strong>  {result.percent}%
+                     </li>
+                    ))}
+                </Card.Body>   
                  </ul>
-                 <Comments />
+             
                </div>
             ) : ( <p>Loading</p>)}
-        
+            <div style={{fontSize:'35px', fontFamily:'sans-serif'}}>
+                    <Comments />
+            </div>   
            
         
-        </div>
+        </Card>
     )
 
 }

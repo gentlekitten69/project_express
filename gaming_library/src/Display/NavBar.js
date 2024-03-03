@@ -13,21 +13,16 @@ const NavBar = () => {
     return ( 
        <nav>
           <ul className="tab">
-         
            <a href="../LoadGames">Home</a>
            <a href="../Popular">New Games</a>
            <a href="../Genre">Different Genre</a>
-            {/* <a className="title"><NavLink to= '/LoadGames'>Home</NavLink></a> */}
-            {/* <a className="title"><NavLink to='/Popular' >New Games</NavLink></a> */}
-            {/* <a className="title"><NavLink to='/Genre'>Different Genre</NavLink></a> */}
            <Search />
           </ul>   
           <Routes>
-            <Route path='/LoadGames' element={<LoadGames />}>Home</Route>
-            <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
-            <Route  path="/:genre" element={<Genre />}/>
+           <Route path='/LoadGames' element={<LoadGames />}>Home</Route>
+           <Route  path='/Popular' element={<PopularGames />}> New Games </Route>
+           <Route  path="/:genre" element={<Genre />}/>
           </Routes>     
-        
         </nav>
         
     )

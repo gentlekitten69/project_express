@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 const PopularGames = () => {
     const [games, setGames] = useState([{}]);
     const [page, setPage] = useState(1)
-    const url = `https://api.rawg.io/api/games?dates=2023-01-01,2023-12-31&page=${page}&key=ef855fc72b30488f8dc0e80014dbfc6a&page_size=16`
+    const url = `https://api.rawg.io/api/games?dates=2023-01-01,2023-12-31&page=${page}&key=ef855fc72b30488f8dc0e80014dbfc6a&page_size=15`
    
    
     useEffect(() => {
