@@ -6,12 +6,7 @@ import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-
 import {  Link } from 'react-router-dom';
-
-
-
-
 
 const Genre = () => { 
     const [games, setGames] = useState([]);
@@ -28,21 +23,22 @@ const Genre = () => {
         };
 
         fetchGames();
-    }, []);
+    }, [url]);
 
  
     return(
         <div>
          <h1 style={{fontSize:'80px'}}>Genre Types</h1>
-           <div className='card' > 
+           <div class='card' > 
              {games.map((game) => (
-           <Card  key={game.id} sx={{width:400, 
-             margin: '16px', backgroundColor:'#449DD1', boxShadow: '5px 15px 5px 5px '}}>
+           <Card key={game.id} sx={{width: 400, 
+             margin: '16px', backgroundColor:'#449DD1', 
+             boxShadow: '5px 15px 5px 5px ',}}>
            <CardMedia 
                component='img'
                alt= {game.name}
-               sx={{maxheight: '50', maxWidth:500}}
-              image={game.image_background} />
+               sx={{height: 290, maxWidth:500}}
+               image={game.image_background} />
            <CardContent>
               <Typography variant='h6' fontWeight='bold' 
                 textAlign='center'>

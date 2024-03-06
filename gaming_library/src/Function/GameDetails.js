@@ -27,21 +27,20 @@ const GameDetails = () => {
     }, [gameId]);
 
     return (
-        <Card class="container">
-            {/* <h1>{games.name}</h1> */}
-            {games ? ( 
-               <div key={gameId} style={{display:'flex', flexDirection:'row'}}>
+        <Card class='col' style={{padding:'50px'}}>
+          {games ? ( 
+               <div key={gameId} style={{display:'flex', flexflow:'row wrap'}}>
                     <Card.Img src={games.background_image} alt={games.name}
-                        style={{maxWidth:'30%' , height:"79rem", padding:'24px 0 0 0 '}}/>
-                    <Card.Text className="description" style={{fontSize:'25px'}}>
+                        style={{maxWidth:'50%' , margin: 'auto', padding:'0 15px 0 0'}}/>
+                    <Card.Text className="description" style={{fontSize:'25px', padding: '0 15px 0px 15px', height: '100%'}}>
                         <h1>{games.name}</h1>
                        <strong>Description:</strong> {games.description_raw.split('Español')[0]}
                     </Card.Text>
-                    <ul key={gameId}>
-                    <Card.Body> 
+                    <ul key={gameId} style={{height: '100%'}}>
+                    <Card.Body > 
                     <p style={{fontSize:'30px'}}>Ratings:</p>
                     {games.ratings.map((result) => (
-                     <li style={{fontSize:'25px', fontFamily:'sans-serif'}}>
+                     <li style={{fontSize:'25px', fontFamily:'sans-serif', padding:'0 5px 0 0'}}>
                       <strong>Id:</strong> {result.id}
                       <br />
                       <strong>Total Comments:</strong>  {result.count} <br />
@@ -49,16 +48,13 @@ const GameDetails = () => {
                       <strong>Overall percentage:</strong>  {result.percent}%
                      </li>
                     ))}
-                </Card.Body>   
+            </Card.Body>   
                  </ul>
-             
                </div>
             ) : ( <p>Loading</p>)}
             <div style={{fontSize:'35px', fontFamily:'sans-serif'}}>
                     <Comments />
             </div>   
-           
-        
         </Card>
     )
 

@@ -1,6 +1,6 @@
 button {
     margin-top: 8px;
-    padding: 8px;
+    padding: 8px ;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -36,19 +36,19 @@ button {
   }
   
 
-  
+ 
 .card {
-    justify-content: space-around;
-    display: inline-flex;
+    justify-content: space-evenly;
+    display: flex;
     flex-wrap: wrap;
-   }
+}
 
 .page {
     flex: row;
     align-items: center;
     justify-content: space-between;
     width: 10%;
-    margin-left: 450px;
+    margin-left: 600px;
 }
 
 .box {
@@ -60,6 +60,7 @@ button {
   border: 2px solid black;
   background-color: #93A6DF;
   font-family: sans-serif;
+  margin: auto;
  }
 
  h1 {
@@ -71,6 +72,7 @@ button {
   ul {
     background-color: #93A6DF;
     border: 2px solid black;
+    margin: auto;
   }
 
  input{
@@ -85,3 +87,6 @@ button {
   right: 1px
  }
 
+ #component {
+  height:'100';
+ }
