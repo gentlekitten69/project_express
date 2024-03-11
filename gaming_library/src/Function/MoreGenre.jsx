@@ -43,7 +43,7 @@ const MoreGenre = () => {
                 <CardMedia 
                   component='img'
                   alt= {game.name}
-                  sx={{height: 180, maxWidth:350}}
+                  sx={{height: 180, maxWidth:'auto'}}
                   src={game.background_image}
                 />
                  <CardContent>

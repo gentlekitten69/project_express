@@ -54,7 +54,7 @@ const LoadGames = () => {
                         <CardMedia
                             component='img'
                             alt= {game.name}
-                            sx={{maxheight: 100, maxWidth:400}}
+                            sx={{maxheight: '100%', maxWidth:400}}
                             image={game.background_image} />
                        <CardContent>
                             <Typography variant='h6' fontWeight='bold' 
@@ -71,7 +71,7 @@ const LoadGames = () => {
                          ))}
                     </div>
                      <button className="page" onClick={handlePrevPage}>Previous Page</button>
-                     <button className="page" onClick={handleLoadNewPage}>Load New Page</button>
+                     <button className="page" onClick={handleLoadNewPage}>Next Page</button>
                 </div> 
       );
     }                          

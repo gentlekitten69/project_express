@@ -68,25 +68,26 @@ const Comments= () => {
             <ul>
                {comments.map((comment) => (
                 <li key={comment.id}><strong>{comment.name}</strong> :  {comment.content}  
-                <button onClick={(e) => handleDelete(comment.id)}>Delete</button></li>
+                <button  style={{margin: '10px 0 10px 100px'}} onClick={(e) => handleDelete(comment.id)}>Delete</button></li>
                ))}
             </ul>
-            <input
-              type= 'text'
-              placeholder='username'
-              name='name'
-              value={newComment.name} 
-              onChange={handleCommentChange}
-            />   
-
-             <input 
-              type='text'
-              placeholder='content'
-              name='content'
-              value={newComment.content}
-              onChange={handleCommentChange}
-             />
-             <button onClick={handleAddComment}>Add Comment</button>
+            <div className='value'>
+               <input
+                 type= 'text'
+                 placeholder='username'
+                 name='name'
+                 value={newComment.name} 
+                  onChange={handleCommentChange}
+                />   
+               <input 
+                 type='text'
+                 placeholder='content'
+                 name='content'
+                 value={newComment.content}
+                 onChange={handleCommentChange}
+                />
+               <button  stlye={{padding:'0'}} onClick={handleAddComment}>Add Comment</button>
+             </div>
         </div>
     )
 }

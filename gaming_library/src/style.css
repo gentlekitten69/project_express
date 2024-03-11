@@ -78,7 +78,9 @@ button {
  input{
   height: 30px;
   width: 65%;
-  font-size: 30px
+  font-size: 30px;
+  border: 1px solid;
+  padding: 8px
  }
 
  .container {
@@ -87,6 +89,10 @@ button {
   right: 1px
  }
 
- #component {
-  height:'100';
+ .value {
+  display: flex;
  }
+
+ /* #component {
+  height:'100';
+ } */
